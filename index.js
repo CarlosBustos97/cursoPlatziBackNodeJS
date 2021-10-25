@@ -1,16 +1,18 @@
-//Llama a express
+//Importa librerias
 const express = require('express');
+//importa el modulo don estan todas las rutas
+const routerApi = require('./routes');
 //Crea una aplicación
-const app = express();
+const app = express('');
 //Indica el puerto en el que va a correr la App
 const port = 3000;
-//Crea la ruta con un callback que corresponde a la respuesta
-app.get('/', (req,res)=>{
-  res.send('Hola mi server en express')
-});
+
+app.use(express.json());
+
+routerApi(app);
+
 
 //Indica que puerto debe escuchar;
 app.listen(port,()=>{
-  console.log('My port' +  port);
+  console.log('My port ' +  port);
 });
- 
