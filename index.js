@@ -9,7 +9,7 @@ const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/err
 //Crea una aplicación
 const app = express('');
 //Indica el puerto en el que va a correr la App
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 
 app.use(express.json());
@@ -20,7 +20,7 @@ const whiteList = ['http://localhost:8080', 'https://myapp.co'];
 //Valida si el origen esta incluido en la lista de dominios con acceso
 const options = {
   origin: (origin, callback) => {
-    if(whiteList.includes(origin)){
+    if(whiteList.includes(origin) || !origin){
       callback(null, true);
     }else{
       callback(new Error('No permitido'))
